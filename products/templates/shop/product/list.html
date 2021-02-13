@@ -1,0 +1,114 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% block title %}
+
+{% if category %}{{ category.name }} {% else %} Products {% endif %}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="products">
+    <div class="container">
+        <div class="col-md-4 products-left">
+            <div class="categories">
+                <h2>Categories</h2>
+                
+                {% for c in categories %}
+                <ul class="cate">
+                    <li><a href="{{ c.get_absolute_url }}"><i class="fa fa-arrow-right" aria-hidden="true"></i>{{ c.name }}</a></li>
+                </ul>
+                {% endfor %}
+            </div>							
+        </div>
+
+        <div class="col-md-8 products-right">
+            <div class="products-right-grid">
+                <div class="products-right-grids">
+                    <div class="sorting">
+                        <select id="country" onchange="change_country(this.value)" class="frm-field required sect">
+                            <option value="null"><i class="fa fa-arrow-right" aria-hidden="true"></i>Default sorting</option>
+                            <option value="null"><i class="fa fa-arrow-right" aria-hidden="true"></i>Sort by popularity</option> 
+                            <option value="null"><i class="fa fa-arrow-right" aria-hidden="true"></i>Sort by average rating</option>					
+                            <option value="null"><i class="fa fa-arrow-right" aria-hidden="true"></i>Sort by price</option>								
+                        </select>
+                    </div>
+                    <div class="sorting-left">
+                        <select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
+                            <option value="null"><i class="fa fa-arrow-right" aria-hidden="true"></i>Item on page 1</option>
+                            <option value="null"><i class="fa fa-arrow-right" aria-hidden="true"></i>Item on page 2</option> 
+                            <option value="null"><i class="fa fa-arrow-right" aria-hidden="true"></i>Item on page 3</option>					
+                            <option value="null"><i class="fa fa-arrow-right" aria-hidden="true"></i>All</option>								
+                        </select>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+            
+            <div class="agile_top_brands_grids">
+			{% for product in products %}
+                
+                <div class="col-md-4 top_brand_left">
+                    <div class="hover14 column">
+                        <div class="agile_top_brand_left_grid">
+                            <div class="agile_top_brand_left_grid1">
+                                    <div class="snipcart-item block">
+                                        <div class="snipcart-thumb">
+                                            <a href="{{ product.get_absolute_url }}"><img title="{{product.nameProd}}"  src="{% if product.image %} {{ product.image.url }} {% else %} {% static 'img/default.jpg' %} {% endif %}" alt="..." style="height: 150px; width: 150px;"></a>		
+                                            <a href="{{ product.get_absolute_url }}"><p>{{ product.nameProd }}</p></a>
+                                            <h4>{{ product.price }} INR </h4>  
+                                        </div>
+                                        {% if product.stock != 0%}
+                                        <div class="snipcart-details top_brand_home_details">
+                                            <form action="{{ product.get_absolute_url }}" method="post">
+                                                {% csrf_token %}
+                                                {{ cart_product_form }}
+                                                <input type="submit" value="View Details" class="btn btn-primary">
+                                            </form>
+                                        </div>
+                                        {% else %}
+                                        <div class="snipcart-details top_brand_home_details">
+                                            <a href="/products"><input type="button" value="OUT OF STOCK" class="btn btn-link" style="color: red; font-weight: bold;"></a>
+                                        </div>
+                                        {% endif %}
+                                    </div>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:3 %}
+                    <div class="clearfix"> </div>
+                {% endif %}
+				{% endfor %}
+                
+                <div class="clearfix"> </div>
+                </div>  
+                
+
+                <nav class="numbering">
+					<ul class="pagination paging">
+						<li>
+							<a href="#" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						<li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+						<li>
+							<a href="#" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+
+
+        
+{% endblock %}

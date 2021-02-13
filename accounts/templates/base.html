@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% load static %}
+
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+            function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //for-mobile-apps -->
+    
+    <link href="{% static 'products/css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{% static 'products/css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <!-- font-awesome icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="{% static 'products/css/font-awesome.css' %}" rel="stylesheet"> 
+    <!-- //font-awesome icons -->
+    <!-- js -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!-- //js -->
+    <link href='//fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+    <!-- start-smoth-scrolling -->
+    <script type="text/javascript" src="{% static 'products/js/move-top.js' %}%"></script>
+    <script type="text/javascript" src="{% static 'products/js/easing.js' %}"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(".scroll").click(function(event){		
+                event.preventDefault();
+                $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+            });
+        });
+    </script>
+    
+<!-- start-smoth-scrolling -->
+</head>
+
+<body>
+    <!-- header -->
+    <div class="agileits_header">
+		<div class="container">
+			<div class="w3l_offers">
+				<p>SALE UP TO 70% OFF. USE CODE "SALE70%" . <a href="{% url 'produits:product_list' %}">SHOP NOW</a></p>
+			</div>
+			<div class="agile-login">
+				<ul>
+                    
+                    {% if user.is_anonymous %}
+                    <li><a href="{% url 'accounts:register' %}"><i class="fas fa-user-plus"></i> Create Account </a></li>
+                    {% endif %}
+                    {% if user.is_authenticated%}
+                    <li><a href="{% url 'accounts:logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    <li><a href="{% url 'orders:history'%}"><i class="fas fa-history"></i> Purchase History</a></li>
+                    <li><a href="{% url 'accounts:profile'%}"><i class="fas fa-user"></i> Profile</a></li>
+                    {% else %}
+                    <li><a href="{% url 'accounts:login' %}"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                    {% endif %}
+					
+				</ul>
+			</div>
+            <div class="product_list_header">  
+                     
+                    {% with totail_items=cart|length %}
+                    {% if cart|length > 0 %}
+                        My Shopping Order:
+                        <a href="{% url 'cart:cart_detail' %}" style="color: #ffffff">
+                                <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                            {{ totail_items }} item{{ totail_items|pluralize }}, DT. {{ cart.get_total_price }}
+                        </a>
+                        {% else %}
+                        <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>Your cart is empty.
+                    {% endif %}
+                {% endwith %}
+
+			</div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+			
+			
+		
+    
+    <div class="logo_products">
+            <div class="container">
+            <div class="w3ls_logo_products_left1">
+                    <ul class="phone_email">
+                        <li><i class="fa fa-phone" aria-hidden="true"></i>Order online or call us : (+0123) 234 567</li>
+                        
+                    </ul>
+                </div>
+                <div class="w3ls_logo_products_left">
+                    <h1><a href="{% url 'accounts:home' %}">@ShrianshWEB</a></h1>
+                </div>
+            <div class="w3l_search">
+                <form action="#" method="post">
+                    <input type="search" name="Search" placeholder="Search for a Product..." required="">
+                    <button type="submit" class="btn btn-default search" aria-label="Left Align">
+                        <i class="fa fa-search" aria-hidden="true"> </i>
+                    </button>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+                
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    <!-- //header -->
+
+<!-- navigation -->
+<div class="navigation-agileits">
+    <div class="container">
+        <nav class="navbar navbar-default">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header nav_2">
+                            <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div> 
+                        <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+                            <ul class="nav navbar-nav">
+                                <li class="active"><a href="index.html" class="act">Home</a></li>	
+                                <!-- Mega Menu -->
+                                {% for c in categories %}
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ c.name }}<b class="caret"></b></a>
+                                    <ul class="dropdown-menu multi-column columns-3">
+                                        <div class="row">
+                                            <div class="multi-gd-img">
+                                                <ul class="multi-column-dropdown">
+                                                    <h6>All {{ c.name }}</h6>
+                                                    <li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>
+                                                </ul>
+                                            </div>	
+                                            
+                                        </div>
+                                    </ul>
+                                </li>
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+                        </nav>
+        </div>
+    </div>
+    
+<!-- //navigation -->
+
+
+
+
+    {% block content %}
+    {% endblock %}
+
+
+<!-- //footer -->
+<div class="footer">
+		<div class="container">
+			<div class="w3_footer_grids">
+				<div class="col-md-3 w3_footer_grid">
+					<h3>Contact</h3>
+					
+					<ul class="address">
+						<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>1234k Avenue, 4th block, <span>New York City.</span></li>
+						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">info@example.com</a></li>
+						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 567</li>
+					</ul>
+				</div>
+				<div class="col-md-3 w3_footer_grid">
+					<h3>Information</h3>
+					<ul class="info"> 
+						<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="about.html">About Us</a></li>
+						<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="contact.html">Contact Us</a></li>
+						<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="short-codes.html">Short Codes</a></li>
+						<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="faq.html">FAQ's</a></li>
+						<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="products.html">Special Products</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3 w3_footer_grid">
+					<h3>Category</h3>
+					<ul class="info"> 
+						<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="groceries.html">Groceries</a></li>
+						<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="household.html">Household</a></li>
+						<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="personalcare.html">Personal Care</a></li>
+						<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="packagedfoods.html">Packaged Foods</a></li>
+						<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="beverages.html">Beverages</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3 w3_footer_grid">
+					<h3>Profile</h3>
+					<ul class="info"> 
+						<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="products.html">Store</a></li>
+						<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="checkout.html">My Cart</a></li>
+						{% if user.is_anonymous %}
+						<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="{% url 'accounts:login' %}">Login</a></li>
+						<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="{% url 'accounts:register' %}">Create Account</a></li>
+						{% else %}
+						<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="{% url 'accounts:logout' %}">Logout</a></li>
+						{% endif %}
+					</ul>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+		
+		<div class="footer-copy">
+			
+			<div class="container">
+				<p>© 2017 Super Market. All rights reserved | Design by <a href="http://w3layouts.com/">Shriansh Agarwal</a></p>
+			</div>
+		</div>
+		
+	</div>	
+	<div class="footer-botm">
+			<div class="container">
+				<div class="w3layouts-foot">
+					<ul>
+						<li><a href="#" class="w3_agile_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+						<li><a href="#" class="agile_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+						<li><a href="#" class="w3_agile_dribble"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+						<li><a href="#" class="w3_agile_vimeo"><i class="fa fa-vimeo" aria-hidden="true"></i></a></li>
+					</ul>
+				</div>
+				<div class="payment-w3ls">	
+					<img src="{% static url 'accounts/images/card.png' %}" alt=" " class="img-responsive">
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+    </div>
+<!-- //footer -->	
+
+</body>
+
+
+
+
+</html>

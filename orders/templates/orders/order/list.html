@@ -1,0 +1,28 @@
+<!-- list.html -->
+
+{% extends 'shop/base.html' %}
+{% load static %}
+{% block content %}
+     
+          <table class="table">
+    <thead>
+        <tr>
+        <th scope="col">Product</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quanitity</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for items in order_items %}
+
+            <tr>
+            <td><a href="">{{items.product}}</a></td>
+            <td>{{items.price}}</td>
+            <td>{{items.quantity}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

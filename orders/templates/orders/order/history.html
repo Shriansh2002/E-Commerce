@@ -1,0 +1,23 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% block content %}
+<table class="table">
+    <thead>
+        <tr>
+        <th scope="col">ID Purchase</th>
+        <th scope="col">Date of Purchase</th>
+        <th scope="col">Date of Update</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in purchases %}
+            <tr>
+            <td><a href="{% url 'orders:order_list'  order.id %}">{{order.id}}</a></td>
+            <td>{{order.created}}</td>
+            <td>{{order.updated}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
