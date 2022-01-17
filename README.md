@@ -2,7 +2,7 @@
 <br>
 <br>
 
-[Playlist](https://bit.ly/ecommerce-source-code)
+[Playlist](https://www.youtube.com/playlist?list=PL6vqxedVRTOYhBU5EmRZqMynZZHetp3od)
 
 
 </h1>
